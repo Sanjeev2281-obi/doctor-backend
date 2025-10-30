@@ -8,7 +8,7 @@ import com.example.backend.repository.UserRepository;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "https://doctor-booking-app22.vercel.app") // Frontend URL
+@CrossOrigin(origins = "http://localhost:5173") // Frontend URL
 public class AuthController {
 
     @Autowired

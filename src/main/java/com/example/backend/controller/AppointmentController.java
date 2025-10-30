@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/appointments")
-@CrossOrigin(origins = "https://doctor-booking-app22.vercel.app")
+@CrossOrigin(origins = "http://localhost:5173")
 public class AppointmentController {
 
     @Autowired
