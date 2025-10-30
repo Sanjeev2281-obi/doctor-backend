@@ -16,11 +16,19 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody User user) {
-        if (userRepository.findByEmail(user.getEmail()) != null) {
-            return ResponseEntity.badRequest().body("Email already exists");
+        try {
+            User existingUser = userRepository.findByEmail(user.getEmail());
+            if (existingUser != null) {
+                return ResponseEntity.status(400).body("Email already exists");
+            }
+
+            User saved = userRepository.save(user);
+            return ResponseEntity.ok(saved);
+
+        } catch (Exception e) {
+            e.printStackTrace(); // For Render logs
+            return ResponseEntity.status(500).body("Something went wrong: " + e.getMessage());
         }
-        User saved = userRepository.save(user);
-        return ResponseEntity.ok(saved);
     }
 
     @PostMapping("/login")
