@@ -15,7 +15,7 @@ public class CorsConfig {
                 registry.addMapping("/**") // allow all endpoints
                         .allowedOrigins("https://doctor-booking-app-ra1k.vercel.app") // frontend URL
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*");
+                         .allowedHeaders("*");
             }
         };
     }
