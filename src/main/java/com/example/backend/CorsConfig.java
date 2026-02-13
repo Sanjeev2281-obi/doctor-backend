@@ -1,4 +1,5 @@
 package com.example.backend;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -12,10 +13,11 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**") // allow all endpoints
-                        .allowedOrigins("https://doctor-booking-app22.vercel.app") // frontend URL
+                registry.addMapping("/**")
+                        .allowedOrigins("https://doctor-booking-app22.vercel.app")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                         .allowedHeaders("*");
+                        .allowedHeaders("*")
+                        .allowCredentials(true); // if you need cookies/auth
             }
         };
     }
