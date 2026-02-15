@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.backend.entity.Appointment;
 import com.example.backend.repository.AppointmentRepository;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/appointments")
-@CrossOrigin(origins = "https://doctor-booking-app22.vercel.app")
+@CrossOrigin(origins = "https://doctor-booking-app22.vercel.app")//"")
 public class AppointmentController {
 
     @Autowired

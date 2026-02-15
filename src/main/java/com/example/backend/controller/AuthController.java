@@ -23,7 +23,7 @@ public class AuthController {
             if (!existingUsers.isEmpty()) {
                 return ResponseEntity.status(400).body("Email already exists");
             }
-
+            
             User saved = userRepository.save(user);
             return ResponseEntity.ok(saved);
 
