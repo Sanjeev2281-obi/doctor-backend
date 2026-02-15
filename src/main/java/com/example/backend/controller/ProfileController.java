@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/profile")
-@CrossOrigin(origins = "https://doctor-booking-app22.vercel.app") 
+ 
 public class ProfileController {
 
     @Autowired

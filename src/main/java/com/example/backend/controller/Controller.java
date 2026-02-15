@@ -8,7 +8,7 @@ import com.example.backend.repository.ProfileRepo;
 
 @RestController
 @RequestMapping("/api/profile")
-@CrossOrigin(origins = "http://localhost:5173") // change later if deployed
+
 public class Controller {
 
     @Autowired
