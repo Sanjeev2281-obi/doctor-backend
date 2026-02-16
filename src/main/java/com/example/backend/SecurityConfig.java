@@ -13,6 +13,7 @@ public class SecurityConfig {
 
         http
             .csrf(csrf -> csrf.disable())
+            .cors(cors -> {})   // ✅ modern way
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
                     "/api/auth/**",
