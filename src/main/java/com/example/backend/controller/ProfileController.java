@@ -16,15 +16,23 @@ public class ProfileController {
     @Autowired
     private ProfileRepo profileRepo;
 
-    // Fetch profile by email (you can also use id)
     @GetMapping("/{email}")
-    public ResponseEntity<?> getProfile(@PathVariable String email) {
-        Optional<Profile> profileOpt = profileRepo.findByEmail(email);
-        if (profileOpt.isEmpty()) {
-            return ResponseEntity.status(404).body("Profile not found");
-        }
-        return ResponseEntity.ok(profileOpt.get());
-    }
+public ResponseEntity<?> getProfile(@PathVariable String email) {
+
+    Profile profile = profileRepo.findByEmail(email)
+        .orElseGet(() -> {
+            Profile p = new Profile();
+            p.setEmail(email);
+            p.setName("");     
+            p.setPhone("");
+            p.setGender("Male");
+            profileRepo.save(p);   
+            return p;
+        });
+
+    return ResponseEntity.ok(profile);
+}
+
 
     // Update profile
     @PutMapping("/{email}")
