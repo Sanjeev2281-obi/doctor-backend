@@ -2,7 +2,6 @@ package com.example.backend;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -13,17 +12,17 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-            .cors(Customizer.withDefaults())   // ✅ IMPORTANT
             .csrf(csrf -> csrf.disable())
+            .cors(cors -> {})   // enable CORS
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
-                    "/api/auth/**",
-                    "/api/profile/**",
+                    "/api/**",
                     "/health"
                 ).permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
             )
-            .httpBasic(Customizer.withDefaults()); // ✅ IMPORTANT
+            .formLogin(form -> form.disable())   // ❌ disable login page
+            .httpBasic(basic -> basic.disable()); // ❌ disable basic auth
 
         return http.build();
     }
