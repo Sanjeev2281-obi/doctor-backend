@@ -1,5 +1,7 @@
 package com.example.backend.controller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,10 +19,25 @@ public class AppointmentController {
 
     @Autowired
     private AppointmentRepository appointmentRepository;
-    @PostMapping
-    public Appointment createAppointment(@RequestBody Appointment appointment) {
-        return appointmentRepository.save(appointment);
+   @PostMapping
+public ResponseEntity<?> createAppointment(@RequestBody Appointment appointment) {
+
+    boolean alreadyBooked =
+        appointmentRepository.existsByDoctorNameAndDateAndTime(
+            appointment.getDoctorName(),
+            appointment.getDate(),
+            appointment.getTime()
+        );
+
+    if (alreadyBooked) {
+        return ResponseEntity
+            .status(HttpStatus.CONFLICT)
+            .body("This slot is already booked");
     }
+
+    Appointment saved = appointmentRepository.save(appointment);
+    return ResponseEntity.ok(saved);
+}
     @GetMapping("/{email}")
     public List<Appointment> getAppointmentsByUser(@PathVariable String email) {
         return appointmentRepository.findByUserEmail(email);
