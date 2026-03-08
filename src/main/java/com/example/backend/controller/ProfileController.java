@@ -26,7 +26,7 @@ public ResponseEntity<?> getProfile(@PathVariable String email) {
             p.setGender("Male");
             profileRepo.save(p);   
             return p;
-        });
+        }); 
 
     return ResponseEntity.ok(profile);
 }
