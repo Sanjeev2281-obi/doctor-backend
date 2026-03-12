@@ -29,26 +29,31 @@ private EmailService emailService;
    @PostMapping
 public ResponseEntity<?> createAppointment(@RequestBody Appointment appointment) {
 
-    boolean alreadyBooked =
-        appointmentRepository.existsByDoctorNameAndDateAndTime(
-            appointment.getDoctorName(),
-            appointment.getDate(),
-            appointment.getTime()
-        );
-
-    if (alreadyBooked) {
-        return ResponseEntity
-            .status(HttpStatus.CONFLICT)
-            .body("This slot is already booked");
-    }
-
-    Appointment saved = appointmentRepository.save(appointment);
-     emailService.sendAppointmentConfirmation(
-        appointment.getUserEmail(),
+    boolean alreadyBooked = appointmentRepository.existsByDoctorNameAndDateAndTime(
         appointment.getDoctorName(),
         appointment.getDate(),
         appointment.getTime()
     );
+
+    if (alreadyBooked) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                             .body("This slot is already booked");
+    }
+
+    Appointment saved = appointmentRepository.save(appointment);
+
+    // safe email sending
+    try {
+        emailService.sendAppointmentConfirmation(
+            appointment.getUserEmail(),
+            appointment.getDoctorName(),
+            appointment.getDate(),
+            appointment.getTime()
+        );
+    } catch (Exception e) {
+        System.err.println("Email sending failed: " + e.getMessage());
+    }
+
     return ResponseEntity.ok(saved);
 }
     @PutMapping("/pay/{id}")

@@ -14,7 +14,7 @@ public class Appointment {
     private String doctorImage;
     private String date;
     private String time;
-    private String paymentStatus;
+    private String paymentStatus="unpaid";
     
 
     // Getters & Setters
