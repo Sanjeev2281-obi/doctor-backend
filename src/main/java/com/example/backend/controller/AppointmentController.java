@@ -67,7 +67,7 @@ public String payAppointment(@PathVariable Long id) {
 
     Appointment appointment = appointmentOpt.get();
 
-    appointment.setPaymentStatus("paid");
+    appointment.setPaymentStatus("PAID");
 
     appointmentRepository.save(appointment);
 
