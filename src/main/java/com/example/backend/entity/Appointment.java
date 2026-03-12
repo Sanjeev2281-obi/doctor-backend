@@ -14,7 +14,8 @@ public class Appointment {
     private String doctorImage;
     private String date;
     private String time;
-    private String status;
+    private String paymentStatus;
+    
 
     // Getters & Setters
     public Long getId() { return id; }
@@ -35,6 +36,7 @@ public class Appointment {
     public String getTime() { return time; }
     public void setTime(String time) { this.time = time; }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public String getPaymentStatus() { return paymentStatus; }
+    public void setPaymentStatus(String paymentStatus) { this.paymentStatus = paymentStatus; }
+    
 }
