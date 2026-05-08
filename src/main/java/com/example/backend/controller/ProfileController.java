@@ -32,7 +32,7 @@ public ResponseEntity<?> getProfile(@PathVariable String email) {
 }
 
 
-    // Update profile
+    
     @PutMapping("/{email}")
     public ResponseEntity<?> updateProfile(
         @PathVariable String email,

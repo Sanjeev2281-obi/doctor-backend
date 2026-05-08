@@ -43,7 +43,6 @@ public class AuthController {
         if (!existing.getPassword().equals(user.getPassword())) {
             return ResponseEntity.status(401).body("Invalid email or password");
         }
-
         return ResponseEntity.ok(existing);
     }
 

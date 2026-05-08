@@ -42,7 +42,7 @@ public ResponseEntity<?> createAppointment(@RequestBody Appointment appointment)
 
     Appointment saved = appointmentRepository.save(appointment);
 
-    // safe email sending
+    //  email sending
     try {
         emailService.sendAppointmentConfirmation(
             appointment.getUserEmail(),

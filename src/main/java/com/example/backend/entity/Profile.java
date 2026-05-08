@@ -20,7 +20,7 @@ public class Profile {
     @Embedded
     private Address address;
 
-    // Constructors
+   
     public Profile() {}
     public Profile(String name, String email, String phone, String gender, String dob, String image, Address address) {
         this.name = name;
@@ -31,8 +31,7 @@ public class Profile {
         this.image = image;
         this.address = address;
     }
-
-    // Getters and Setters
+    
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }
