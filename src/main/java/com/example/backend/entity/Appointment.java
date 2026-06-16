@@ -14,8 +14,17 @@ public class Appointment {
     private String doctorImage;
     private String date;
     private String time;
-    private String paymentStatus="UNPAID";
-    
+
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus = PaymentStatus.UNPAID;
+
+    @ManyToOne
+    @JoinColumn(name = "doctor_id")
+    private Doctor doctor;
+
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    private User patient;
 
     // Getters & Setters
     public Long getId() { return id; }
@@ -36,7 +45,12 @@ public class Appointment {
     public String getTime() { return time; }
     public void setTime(String time) { this.time = time; }
 
-    public String getPaymentStatus() { return paymentStatus; }
-    public void setPaymentStatus(String paymentStatus) { this.paymentStatus = paymentStatus; }
-    
+    public PaymentStatus getPaymentStatus() { return paymentStatus; }
+    public void setPaymentStatus(PaymentStatus paymentStatus) { this.paymentStatus = paymentStatus; }
+
+    public Doctor getDoctor() { return doctor; }
+    public void setDoctor(Doctor doctor) { this.doctor = doctor; }
+
+    public User getPatient() { return patient; }
+    public void setPatient(User patient) { this.patient = patient; }
 }
